@@ -69,10 +69,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-PrimeCount" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-sieve" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/11/07/PrimeCount/" class="article-date">
-  <time datetime="2018-11-07T11:30:04.000Z" itemprop="datePublished">2018-11-07</time>
+    <a href="/2018/11/07/sieve/" class="article-date">
+  <time datetime="2018-11-07T11:57:40.000Z" itemprop="datePublished">2018-11-07</time>
 </a>
     
   </div>
@@ -83,7 +83,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/07/PrimeCount/">muban</a>
+      <a class="article-title" href="/2018/11/07/sieve/">sieve</a>
     </h1>
   
 
@@ -91,11 +91,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1000005<span class="comment">// MAXN=sqrt(upper_bound)</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 1000000000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MOD 1000000007</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> F first</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S second</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; P;</span><br><span class="line">ll f[MAXN],g[MAXN],n,k; <span class="comment">//f[i]:pi(n/i),g[i]:pi(i)</span></span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">PrimeCount</span><span class="params">(ll n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll i,j,m=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(m=<span class="number">1</span>;m*m&lt;=n;m++) f[m]=n/m<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=m;i++) g[i]=i<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(g[i]==g[i<span class="number">-1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=min(m<span class="number">-1</span>,n/i/i);++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(i*j&lt;m) f[j]-=f[i*j]-g[i<span class="number">-1</span>];</span><br><span class="line">            <span class="keyword">else</span> f[j]-=g[n/i/j]-g[i<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(j=m;j&gt;=i*i;j--) g[j]-=g[j/i]-g[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n)==<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,PrimeCount(n));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//线性筛  Phi miu prime</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100005</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MOD 1000000007</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 1000000000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">int</span> prime[MAXN],phi[MAXN],miu[MAXN];</span><br><span class="line"><span class="keyword">bool</span> is_prime[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sieve</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> p=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=n;i++) is_prime[i]=<span class="literal">true</span>;</span><br><span class="line">    is_prime[<span class="number">0</span>]=is_prime[<span class="number">1</span>]=<span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(is_prime[i]) prime[p++]=i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;p;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(prime[j]*i&gt;n) <span class="keyword">break</span>;</span><br><span class="line">            is_prime[prime[j]*i]=<span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">if</span>(i%prime[j]==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">genphi</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> p=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(phi,<span class="number">0</span>,<span class="keyword">sizeof</span>(phi));</span><br><span class="line">    phi[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(is_prime[i]) &#123;p++; phi[i]=i<span class="number">-1</span>;&#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;p;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(prime[j]*i&gt;n) <span class="keyword">break</span>;</span><br><span class="line">            phi[i*prime[j]]=phi[i]*(i%prime[j]?prime[j]<span class="number">-1</span>:prime[j]);</span><br><span class="line">            <span class="keyword">if</span>(i%prime[j]==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">genmiu</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> p=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(miu,<span class="number">0</span>,<span class="keyword">sizeof</span>(miu));</span><br><span class="line">    miu[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(is_prime[i]) &#123;p++; miu[i]=<span class="number">-1</span>;&#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;p;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(prime[j]*i&gt;n) <span class="keyword">break</span>;</span><br><span class="line">            miu[i*prime[j]]=i%prime[j]?-miu[i]:<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(i%prime[j]==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    sieve(<span class="number">100000</span>);</span><br><span class="line">    genphi(<span class="number">100000</span>);</span><br><span class="line">    genmiu(<span class="number">100000</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">10</span>;i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,phi[i]);</span><br><span class="line">    system(<span class="string">"pause"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/11/07/PrimeCount/" data-id="cjo739aac0001s4r5tgqc3uml" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/11/07/sieve/" data-id="cjo740mee0005v4r5u88xw34n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -119,7 +119,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/07/Euler/">muban</a>
+      <a class="article-title" href="/2018/11/07/Euler/">Euler</a>
     </h1>
   
 
@@ -131,7 +131,79 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/11/07/Euler/" data-id="cjo73lmmo0000z8r53jpaegpk" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/11/07/Euler/" data-id="cjo740mdu0000v4r5h7l1hfur" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-PrimeCount" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/07/PrimeCount/" class="article-date">
+  <time datetime="2018-11-07T11:30:04.000Z" itemprop="datePublished">2018-11-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/07/PrimeCount/">PrimeCount</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1000005<span class="comment">// MAXN=sqrt(upper_bound)</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 1000000000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MOD 1000000007</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> F first</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S second</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; P;</span><br><span class="line">ll f[MAXN],g[MAXN],n,k; <span class="comment">//f[i]:pi(n/i),g[i]:pi(i)</span></span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">PrimeCount</span><span class="params">(ll n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll i,j,m=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(m=<span class="number">1</span>;m*m&lt;=n;m++) f[m]=n/m<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=m;i++) g[i]=i<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(g[i]==g[i<span class="number">-1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=min(m<span class="number">-1</span>,n/i/i);++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(i*j&lt;m) f[j]-=f[i*j]-g[i<span class="number">-1</span>];</span><br><span class="line">            <span class="keyword">else</span> f[j]-=g[n/i/j]-g[i<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(j=m;j&gt;=i*i;j--) g[j]-=g[j/i]-g[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n)==<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,PrimeCount(n));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ellery.com/2018/11/07/PrimeCount/" data-id="cjo740med0004v4r5cxxbylq5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-muban" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/07/muban/" class="article-date">
+  <time datetime="2018-11-07T11:30:04.000Z" itemprop="datePublished">2018-11-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/07/muban/">PrimeCount</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//PrimeCount</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1000005<span class="comment">// MAXN=sqrt(upper_bound)</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 1000000000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MOD 1000000007</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> F first</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S second</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; P;</span><br><span class="line">ll f[MAXN],g[MAXN],n,k; <span class="comment">//f[i]:pi(n/i),g[i]:pi(i)</span></span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">PrimeCount</span><span class="params">(ll n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll i,j,m=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(m=<span class="number">1</span>;m*m&lt;=n;m++) f[m]=n/m<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=m;i++) g[i]=i<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(g[i]==g[i<span class="number">-1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=min(m<span class="number">-1</span>,n/i/i);++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(i*j&lt;m) f[j]-=f[i*j]-g[i<span class="number">-1</span>];</span><br><span class="line">            <span class="keyword">else</span> f[j]-=g[n/i/j]-g[i<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(j=m;j&gt;=i*i;j--) g[j]-=g[j/i]-g[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n)==<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,PrimeCount(n));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ellery.com/2018/11/07/muban/" data-id="cjo7451sg00004kr5t4cjlrmd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -168,7 +240,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/10/28/arrayTree/" data-id="cjo739aah0003s4r5795k4gsz" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/10/28/arrayTree/" data-id="cjo740me90002v4r5davl4phf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -205,7 +277,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/10/28/tree/arrayTree/" data-id="cjo739ab60006s4r594rowok8" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/10/28/tree/arrayTree/" data-id="cjo740mf40007v4r5yavennhe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -243,7 +315,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/10/26/First/" data-id="cjo739aa50000s4r559j0mh8o" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/10/26/First/" data-id="cjo740me60001v4r53i4q5yse" class="article-share-link">Share</a>
       
       
     </footer>
@@ -279,7 +351,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/10/26/try/" data-id="cjo739aal0005s4r595un4ppx" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/10/26/try/" data-id="cjo740meh0006v4r5ki9khevx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -324,7 +396,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/10/26/hello-world/" data-id="cjo739aaf0002s4r5qsr7dn3s" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/10/26/hello-world/" data-id="cjo740meb0003v4r5gz9n7lst" class="article-share-link">Share</a>
       
       
     </footer>
@@ -365,23 +437,23 @@
       <ul>
         
           <li>
-            <a href="/2018/11/07/PrimeCount/">muban</a>
+            <a href="/2018/11/07/sieve/">sieve</a>
           </li>
         
           <li>
-            <a href="/2018/11/07/Euler/">muban</a>
+            <a href="/2018/11/07/Euler/">Euler</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/07/PrimeCount/">PrimeCount</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/07/muban/">PrimeCount</a>
           </li>
         
           <li>
             <a href="/2018/10/28/arrayTree/">树状数组</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/28/tree/arrayTree/">树状数组</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/26/First/">First</a>
           </li>
         
       </ul>
