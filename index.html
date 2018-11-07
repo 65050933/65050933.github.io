@@ -95,7 +95,43 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/11/07/PrimeCount/" data-id="cjo735b9m0002xkr5i1a616eu" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/11/07/PrimeCount/" data-id="cjo739aac0001s4r5tgqc3uml" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Euler" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/07/Euler/" class="article-date">
+  <time datetime="2018-11-07T11:30:04.000Z" itemprop="datePublished">2018-11-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/07/Euler/">muban</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Euler 打表</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> phi[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">phi1</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res=n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i*i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(n%i==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            res=res/i*(i<span class="number">-1</span>);</span><br><span class="line">            <span class="keyword">for</span>(;n%i==<span class="number">0</span>;n/=i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n!=<span class="number">1</span>) res=res/n*(n<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">phi2</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;MAXN;i++) phi[i]=i;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;MAXN;i++)</span><br><span class="line">        <span class="keyword">if</span>(phi[i]==i)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;MAXN;j+=i) phi[j]=phi[j]/i*(i<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ellery.com/2018/11/07/Euler/" data-id="cjo73lmmo0000z8r53jpaegpk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -132,7 +168,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/10/28/arrayTree/" data-id="cjo735b9r0004xkr5s3413zjy" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/10/28/arrayTree/" data-id="cjo739aah0003s4r5795k4gsz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -169,7 +205,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/10/28/tree/arrayTree/" data-id="cjo735bac0005xkr5zcmj966l" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/10/28/tree/arrayTree/" data-id="cjo739ab60006s4r594rowok8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -207,7 +243,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/10/26/First/" data-id="cjo735b9i0001xkr5fa868sho" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/10/26/First/" data-id="cjo739aa50000s4r559j0mh8o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -243,7 +279,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/10/26/try/" data-id="cjo735b9p0003xkr5b9ctrofg" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/10/26/try/" data-id="cjo739aal0005s4r595un4ppx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -288,7 +324,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/10/26/hello-world/" data-id="cjo735b9b0000xkr5rs1qt5zh" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/10/26/hello-world/" data-id="cjo739aaf0002s4r5qsr7dn3s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -333,6 +369,10 @@
           </li>
         
           <li>
+            <a href="/2018/11/07/Euler/">muban</a>
+          </li>
+        
+          <li>
             <a href="/2018/10/28/arrayTree/">树状数组</a>
           </li>
         
@@ -342,10 +382,6 @@
         
           <li>
             <a href="/2018/10/26/First/">First</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/26/try/">try</a>
           </li>
         
       </ul>
