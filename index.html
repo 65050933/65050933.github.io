@@ -69,6 +69,42 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LCA" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/28/LCA/" class="article-date">
+  <time datetime="2018-11-28T12:39:33.000Z" itemprop="datePublished">2018-11-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/28/LCA/">LCA</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e5</span>+<span class="number">5</span>;<span class="comment">//点数</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> to;</span><br><span class="line">    <span class="keyword">int</span> weight;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">vector</span> &lt;node&gt; G[maxn];</span><br><span class="line"><span class="keyword">int</span> father[maxn][<span class="number">40</span>];</span><br><span class="line"><span class="keyword">int</span> deep[maxn];</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="keyword">bool</span> vis[maxn];</span><br><span class="line"><span class="keyword">int</span> dis[maxn];</span><br><span class="line"><span class="keyword">int</span> head;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> from,<span class="keyword">int</span> to,<span class="keyword">int</span> weight)</span></span>&#123;</span><br><span class="line">    node x;</span><br><span class="line">    x.to = to;</span><br><span class="line">    x.weight = weight;</span><br><span class="line">    G[from].push_back(x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    vis[u] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>;i&lt;G[u].size();i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> v = G[u][i].to;</span><br><span class="line">        <span class="keyword">if</span>(vis[v]==<span class="number">0</span>)&#123;</span><br><span class="line">           <span class="comment">// vis[v] = 1;</span></span><br><span class="line">           deep[v] = deep[u] + <span class="number">1</span>;</span><br><span class="line">           father[v][<span class="number">0</span>] = u;<span class="comment">//这个地方对father的处理要记住，不然之前对father的递推会一直等于0</span></span><br><span class="line">            dis[v] = dis[u] + G[u][i].weight;</span><br><span class="line">            dfs(v);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bz</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//father[2][0] = 1;</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= <span class="number">30</span>;j++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i++)&#123;</span><br><span class="line">            father[i][j] = father[father[i][j<span class="number">-1</span>]][j<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LCA</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(deep[u]&lt;deep[v])&#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = u;</span><br><span class="line">        u = v;</span><br><span class="line">        v = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> D = deep[u] - deep[v];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">30</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>((<span class="number">1</span>&lt;&lt;i) &amp; D)&#123;</span><br><span class="line">            u = father[u][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(v==u) <span class="keyword">return</span> u;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">29</span>;i &gt;= <span class="number">0</span>;i--)&#123;</span><br><span class="line">        <span class="comment">//cout&lt;&lt;u&lt;&lt;" "&lt;&lt;v&lt;&lt;endl;</span></span><br><span class="line">        <span class="keyword">if</span>(father[u][i]!=father[v][i])&#123;</span><br><span class="line">            u = father[u][i];</span><br><span class="line">            v = father[v][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    u = father[u][<span class="number">0</span>];</span><br><span class="line">    <span class="comment">//cout&lt;&lt;"Haha"&lt;&lt;father[u][1]&lt;&lt;endl;</span></span><br><span class="line">    <span class="keyword">return</span> u;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> q;<span class="comment">//查询次数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ;i &lt;= n;i++)&#123;</span><br><span class="line">        G[i].clear();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">    <span class="built_in">memset</span>(father,<span class="number">0</span>,<span class="keyword">sizeof</span>(father));</span><br><span class="line">    <span class="built_in">memset</span>(deep,<span class="number">0</span>,<span class="keyword">sizeof</span>(deep));</span><br><span class="line">    <span class="built_in">memset</span>(dis,<span class="number">0</span>,<span class="keyword">sizeof</span>(dis));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ellery.com/2018/11/28/LCA/" data-id="cjp15wb90000000r5e9y8w2l9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Flow and Cut" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/11/08/Flow and Cut/" class="article-date">
@@ -101,10 +137,12 @@
 <font size="7"><br><strong>MinCostFlow</strong><br></font>
 
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXV 1000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXE 10000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 1000000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; P;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span><span class="keyword">int</span> to,cap,cost,rev;&#125;;</span><br><span class="line"><span class="keyword">int</span> dist[MAXV],h[MAXV],prevv[MAXV],preve[MAXV];</span><br><span class="line"><span class="keyword">int</span> V;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; G[MAXV];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add_edge</span><span class="params">(<span class="keyword">int</span> from,<span class="keyword">int</span> to,<span class="keyword">int</span> cap,<span class="keyword">int</span> cost)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    G[from].push_back((edge)&#123;to,cap,cost,G[to].size()&#125;);</span><br><span class="line">    G[to].push_back((edge)&#123;from,<span class="number">0</span>,-cost,G[from].size()<span class="number">-1</span>&#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">min_cost_flow</span><span class="params">(<span class="keyword">int</span> s,<span class="keyword">int</span> t,<span class="keyword">int</span> f)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">    fill(h,h+V,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">while</span>(f&gt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        priority_queue&lt;P,<span class="built_in">vector</span>&lt;P&gt;,greater&lt;P&gt; &gt;que;</span><br><span class="line">        fill(dist,dist+V,INF);</span><br><span class="line">        dist[s]=<span class="number">0</span>;</span><br><span class="line">        que.push(P(<span class="number">0</span>,s));</span><br><span class="line">        <span class="keyword">while</span>(!que.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            P p=que.top(); que.pop();</span><br><span class="line">            <span class="keyword">int</span> v=p.second;</span><br><span class="line">            <span class="keyword">if</span>(dist[v]&lt;p.first) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;G[v].size();i++)</span><br><span class="line">            &#123;</span><br><span class="line">                edge &amp;e=G[v][i];</span><br><span class="line">                <span class="keyword">if</span>(e.cap&gt;<span class="number">0</span>&amp;&amp;dist[e.to]&gt;dist[v]+e.cost+h[v]-h[e.to])</span><br><span class="line">                &#123;</span><br><span class="line">                    dist[e.to]=dist[v]+e.cost+h[v]-h[e.to];</span><br><span class="line">                    prevv[e.to]=v;</span><br><span class="line">                    preve[e.to]=i;</span><br><span class="line">                    que.push(P(dist[e.to],e.to));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(dist[t]==INF)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> v=<span class="number">0</span>;v&lt;V;v++) h[v]+=dist[v];</span><br><span class="line">        <span class="keyword">int</span> d=f;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> v=t;v!=s;v=prevv[v])</span><br><span class="line">        &#123;</span><br><span class="line">            d=min(d,G[prevv[v]][preve[v]].cap);</span><br><span class="line">        &#125;</span><br><span class="line">        f-=d;</span><br><span class="line">        res+=d*h[t];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> v=t;v!=s;v=prevv[v])</span><br><span class="line">        &#123;</span><br><span class="line">            edge &amp;e=G[prevv[v]][preve[v]];</span><br><span class="line">            e.cap-=d;</span><br><span class="line">            G[v][e.rev].cap+=d;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>0 2<br>3 0.01<br>1 0.04</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/11/08/Flow and Cut/" data-id="cjotxgi800000t4r5ze33b0wm" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/11/08/Flow and Cut/" data-id="cjp15wb98000200r5r1oi4qxm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -143,7 +181,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/11/08/MST/" data-id="cjotxgi8d0001t4r580twkm33" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/11/08/MST/" data-id="cjp15wb96000100r50okt1jeg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -185,7 +223,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/11/08/Short Path/" data-id="cjotxgi8h0004t4r5qtw7p4sh" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/11/08/Short Path/" data-id="cjp15wb99000300r5j41k130t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -221,7 +259,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/11/08/int128/" data-id="cjotxgi8i0005t4r5mhju0poq" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/11/08/int128/" data-id="cjp15wb9w000900r5xbdbk979" class="article-share-link">Share</a>
       
       
     </footer>
@@ -257,7 +295,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/11/07/sieve/" data-id="cjotxgi8p000at4r5beja5d3g" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/11/07/sieve/" data-id="cjp15wb9o000400r5rvn9qwll" class="article-share-link">Share</a>
       
       
     </footer>
@@ -293,7 +331,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/11/07/Euler/" data-id="cjotxgi8f0002t4r52ys0dfny" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/11/07/Euler/" data-id="cjp15wb9v000800r5yvk05p0n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -329,7 +367,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/11/07/PrimeCount/" data-id="cjotxgi8l0007t4r5fkmolofb" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/11/07/PrimeCount/" data-id="cjp15wba0000b00r5o01jlaaz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -366,7 +404,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/10/28/arrayTree/" data-id="cjotxgi8g0003t4r5e79owbkr" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/10/28/arrayTree/" data-id="cjp15wb9q000500r5cswf741o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -403,45 +441,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/10/28/tree/arrayTree/" data-id="cjotxgi9f000bt4r517dgpzw9" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-First" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/26/First/" class="article-date">
-  <time datetime="2018-10-26T05:13:39.000Z" itemprop="datePublished">2018-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/26/First/">First</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="你好-欢迎来到这里"><a href="#你好-欢迎来到这里" class="headerlink" title="你好 欢迎来到这里"></a><strong>你好 欢迎来到这里</strong></h1><p>这是一道cf题目的题解<br><code color="red"><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isPrime</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> n)</span></span></span><br><span class="line"><span class="function">    <span class="title">if</span><span class="params">(n==<span class="number">1</span>)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">2</span>||n==<span class="number">3</span>||n==<span class="number">5</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> i = <span class="number">2</span>;i*i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="comment">//cout&lt;&lt;"hah";</span></span><br><span class="line">        <span class="keyword">if</span>(n%i==<span class="number">2</span>)&#123;</span><br><span class="line">            <span class="comment">//cout&lt;&lt;"hah";</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> n = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n))&#123;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> temp = n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> i = <span class="number">1</span>;i*i&lt;=temp;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(n%i==<span class="number">0</span>)&#123;</span><br><span class="line">                cnt++;</span><br><span class="line">                <span class="keyword">if</span>(i*i &lt; temp)&#123;</span><br><span class="line">                    cnt++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,cnt);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></p>
-<p></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/10/26/First/" data-id="cjotxgi8m0008t4r54r8jr7ao" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/10/28/tree/arrayTree/" data-id="cjp15wbac000c00r5lyawo874" class="article-share-link">Share</a>
       
       
     </footer>
@@ -487,6 +487,10 @@
       <ul>
         
           <li>
+            <a href="/2018/11/28/LCA/">LCA</a>
+          </li>
+        
+          <li>
             <a href="/2018/11/08/Flow and Cut/">Flow and Cut</a>
           </li>
         
@@ -500,10 +504,6 @@
         
           <li>
             <a href="/2018/11/08/int128/">int128</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/07/sieve/">sieve</a>
           </li>
         
       </ul>
