@@ -5,19 +5,19 @@
   
 
   
-  <title>try | ACM</title>
+  <title>树状数组 | ACM</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.mod(x) 与 x -= MOD的区别2.负数的mod3.虽然开全局变量可以将a[]初始化为0，但是对于ai可以取0时，有可能和数组之外的n+1冲突。4.dfs(int u，int f)这种写法是针对树而言，因为树中没有环，所以可以和father比较，对于图，还是用vis数组标记好5.字符a[i] 在判断与‘z’的大小时，有可能能a[i] + d[i] 会溢出。 //cf #550div3">
+  <meta name="description" content="区间查询和修改12345678910111213141516void add(ll p, ll x)&amp;#123;    for(int i = p; i &amp;lt;= n; i += i &amp;amp; -i)        sum1[i] += x, sum2[i] += x * p;&amp;#125;void range_add(ll l, ll r, ll x)&amp;#123;    add(l, x),">
 <meta property="og:type" content="article">
-<meta property="og:title" content="try">
-<meta property="og:url" content="http://ellery.com/2018/10/26/try/index.html">
+<meta property="og:title" content="树状数组">
+<meta property="og:url" content="http://ellery.com/2018/10/28/BITree/index.html">
 <meta property="og:site_name" content="ACM">
-<meta property="og:description" content="1.mod(x) 与 x -= MOD的区别2.负数的mod3.虽然开全局变量可以将a[]初始化为0，但是对于ai可以取0时，有可能和数组之外的n+1冲突。4.dfs(int u，int f)这种写法是针对树而言，因为树中没有环，所以可以和father比较，对于图，还是用vis数组标记好5.字符a[i] 在判断与‘z’的大小时，有可能能a[i] + d[i] 会溢出。 //cf #550div3">
+<meta property="og:description" content="区间查询和修改12345678910111213141516void add(ll p, ll x)&amp;#123;    for(int i = p; i &amp;lt;= n; i += i &amp;amp; -i)        sum1[i] += x, sum2[i] += x * p;&amp;#125;void range_add(ll l, ll r, ll x)&amp;#123;    add(l, x),">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-02T12:24:30.624Z">
+<meta property="og:updated_time" content="2018-10-31T07:51:49.736Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="try">
-<meta name="twitter:description" content="1.mod(x) 与 x -= MOD的区别2.负数的mod3.虽然开全局变量可以将a[]初始化为0，但是对于ai可以取0时，有可能和数组之外的n+1冲突。4.dfs(int u，int f)这种写法是针对树而言，因为树中没有环，所以可以和father比较，对于图，还是用vis数组标记好5.字符a[i] 在判断与‘z’的大小时，有可能能a[i] + d[i] 会溢出。 //cf #550div3">
+<meta name="twitter:title" content="树状数组">
+<meta name="twitter:description" content="区间查询和修改12345678910111213141516void add(ll p, ll x)&amp;#123;    for(int i = p; i &amp;lt;= n; i += i &amp;amp; -i)        sum1[i] += x, sum2[i] += x * p;&amp;#125;void range_add(ll l, ll r, ll x)&amp;#123;    add(l, x),">
   
     <link rel="alternate" href="/atom.xml" title="ACM" type="application/atom+xml">
   
@@ -68,10 +68,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="first-try" class="article article-type-first" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-BITree" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/10/26/try/" class="article-date">
-  <time datetime="2018-10-26T05:13:37.000Z" itemprop="datePublished">2018-10-26</time>
+    <a href="/2018/10/28/BITree/" class="article-date">
+  <time datetime="2018-10-28T06:20:12.000Z" itemprop="datePublished">2018-10-28</time>
 </a>
     
   </div>
@@ -82,7 +82,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      try
+      树状数组
     </h1>
   
 
@@ -90,12 +90,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1.mod(x) 与 x -= MOD的区别<br>2.负数的mod<br>3.虽然开全局变量可以将a[]初始化为0，但是对于ai可以取0时，有可能和数组之外的n+1冲突。<br>4.dfs(int u，int f)这种写法是针对树而言，因为树中没有环，所以可以和father比较，对于图，还是用vis数组标记好<br>5.字符a[i] 在判断与‘z’的大小时，有可能能a[i] + d[i] 会溢出。 //cf #550div3 E</p>
+        <p>区间查询和修改<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(ll p, ll x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = p; i &lt;= n; i += i &amp; -i)</span><br><span class="line">        sum1[i] += x, sum2[i] += x * p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">range_add</span><span class="params">(ll l, ll r, ll x)</span></span>&#123;</span><br><span class="line">    add(l, x), add(r + <span class="number">1</span>, -x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">ask</span><span class="params">(ll p)</span></span>&#123;</span><br><span class="line">    ll res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = p; i; i -= i &amp; -i)</span><br><span class="line">        res += (p + <span class="number">1</span>) * sum1[i] - sum2[i];</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">range_ask</span><span class="params">(ll l, ll r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ask(r) - ask(l - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/10/26/try/" data-id="cju3y3k9n000btwr5so5h15f9" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/10/28/BITree/" data-id="cju3y3k970001twr5ttj45gv0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -104,19 +104,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/10/26/First/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/11/07/PrimeCount/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          First
+          PrimeCount
         
       </div>
     </a>
   
   
-    <a href="/2018/10/26/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/10/28/tree/arrayTree/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">树状数组</div>
     </a>
   
 </nav>
