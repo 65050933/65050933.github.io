@@ -69,6 +69,43 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-tree/arrayTree" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/28/tree/arrayTree/" class="article-date">
+  <time datetime="2018-10-28T06:20:12.000Z" itemprop="datePublished">2018-10-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/28/tree/arrayTree/">树状数组</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>区间查询和修改<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(ll p, ll x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = p; i &lt;= n; i += i &amp; -i)</span><br><span class="line">        sum1[i] += x, sum2[i] += x * p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">range_add</span><span class="params">(ll l, ll r, ll x)</span></span>&#123;</span><br><span class="line">    add(l, x), add(r + <span class="number">1</span>, -x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">ask</span><span class="params">(ll p)</span></span>&#123;</span><br><span class="line">    ll res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = p; i; i -= i &amp; -i)</span><br><span class="line">        res += (p + <span class="number">1</span>) * sum1[i] - sum2[i];</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">range_ask</span><span class="params">(ll l, ll r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ask(r) - ask(l - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ellery.com/2018/10/28/tree/arrayTree/" data-id="cju3yr1wa000eqsr5mi8xt9vd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-First" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/10/26/First/" class="article-date">
@@ -97,7 +134,44 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/10/26/First/" data-id="cju3y3k990002twr5kxvxpgh6" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/10/26/First/" data-id="cju3yr1v20004qsr5i192wjv2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="first-Mistakes" class="article article-type-first" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/26/Mistakes/" class="article-date">
+  <time datetime="2018-10-26T05:13:37.000Z" itemprop="datePublished">2018-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/26/Mistakes/">try</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.mod(x) 与 x -= MOD的区别<br>2.负数的mod<br>3.虽然开全局变量可以将a[]初始化为0，但是对于ai可以取0时，有可能和数组之外的n+1冲突。<br>4.dfs(int u，int f)这种写法是针对树而言，因为树中没有环，所以可以和father比较，对于图，还是用vis数组标记好<br>5.字符a[i] 在判断与‘z’的大小时，有可能能a[i] + d[i] 会溢出。 //cf #550div3 E</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ellery.com/2018/10/26/Mistakes/" data-id="cju3yr1v40006qsr5swb87fyl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -121,7 +195,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/26/try/">try</a>
+      <a class="article-title" href="/2018/10/26/try/">Mistakes</a>
     </h1>
   
 
@@ -134,7 +208,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/10/26/try/" data-id="cju3y3k9n000btwr5so5h15f9" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/10/26/try/" data-id="cju3yr1ve000cqsr5hv65q1si" class="article-share-link">Share</a>
       
       
     </footer>
@@ -179,7 +253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ellery.com/2018/10/26/hello-world/" data-id="cju3y3k9h0007twr55c8kljly" class="article-share-link">Share</a>
+      <a data-url="http://ellery.com/2018/10/26/hello-world/" data-id="cju3yr1v80009qsr5qsnre9p7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -212,7 +286,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li></ul>
     </div>
   </div>
 
@@ -223,6 +297,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/04/05/依赖背包/">依赖背包</a>
+          </li>
         
           <li>
             <a href="/2018/11/28/LCA/">LCA</a>
@@ -238,10 +316,6 @@
         
           <li>
             <a href="/2018/11/08/Short Path/">Short Path</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/08/int128/">int128</a>
           </li>
         
       </ul>
