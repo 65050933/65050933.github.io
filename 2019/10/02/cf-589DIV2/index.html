@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>CF #589DIV2 | Ellery&#39;s blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="solution,codeforces">
+    
+    <meta name="description" content="CodeForces #589DIV2题解  C Primes and Multiplication定义 prime(x) = \{p|p \in prime \wedge p|x\}即x的所有质因子定义  $g(x, p)$，$f(x, y)$： g(x,p) = p^k (k尽可能大且p^k\mid x) \qquad   f(x, y) = \prod_{i\in prime(x)}g(y,">
+<meta name="keywords" content="solution,codeforces">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CF #589DIV2">
+<meta property="og:url" content="http://ellery.com/2019/10/02/cf-589DIV2/index.html">
+<meta property="og:site_name" content="Ellery&#39;s blog">
+<meta property="og:description" content="CodeForces #589DIV2题解  C Primes and Multiplication定义 prime(x) = \{p|p \in prime \wedge p|x\}即x的所有质因子定义  $g(x, p)$，$f(x, y)$： g(x,p) = p^k (k尽可能大且p^k\mid x) \qquad   f(x, y) = \prod_{i\in prime(x)}g(y,">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ellery.com/thumbnail/CF2.png">
+<meta property="og:updated_time" content="2019-10-02T12:28:30.667Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CF #589DIV2">
+<meta name="twitter:description" content="CodeForces #589DIV2题解  C Primes and Multiplication定义 prime(x) = \{p|p \in prime \wedge p|x\}即x的所有质因子定义  $g(x, p)$，$f(x, y)$： g(x,p) = p^k (k尽可能大且p^k\mid x) \qquad   f(x, y) = \prod_{i\in prime(x)}g(y,">
+<meta name="twitter:image" content="http://ellery.com/thumbnail/CF2.png">
+    
+
+    
+        <link rel="alternate" href="/" title="Ellery&#39;s blog" type="application/atom+xml">
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">记不住东西随便写写的博客~</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/yourdiy">暂时没想到做什么</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/solution/">solution</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/solution/codeforces/">codeforces</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-cf-589DIV2" class="article article-single article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        CF #589DIV2
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/10/02/cf-589DIV2/" class="article-date">
+            <time datetime="2019-10-02T07:36:30.000Z" itemprop="datePublished">2019-10-02</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/codeforces/">codeforces</a>, <a class="tag-link" href="/tags/solution/">solution</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="CodeForces-589DIV2题解"><a href="#CodeForces-589DIV2题解" class="headerlink" title="CodeForces #589DIV2题解"></a><center>CodeForces #589DIV2题解</center></h2><hr>
+
+<h3 id="C-Primes-and-Multiplication"><a href="#C-Primes-and-Multiplication" class="headerlink" title="C Primes and Multiplication"></a>C Primes and Multiplication</h3><h5 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h5><script type="math/tex; mode=display">
+prime(x) = \{p|p \in prime \wedge p|x\}</script><h5 id="即x的所有质因子"><a href="#即x的所有质因子" class="headerlink" title="即x的所有质因子"></a>即x的所有质因子</h5><h5 id="定义-g-x-p-，-f-x-y-："><a href="#定义-g-x-p-，-f-x-y-：" class="headerlink" title="定义  $g(x, p)$，$f(x, y)$："></a>定义  $g(x, p)$，$f(x, y)$：</h5><script type="math/tex; mode=display">
+g(x,p) = p^k (k尽可能大且p^k\mid x) \qquad   f(x, y) = \prod_{i\in prime(x)}g(y, i) \qquad</script><h5 id="给定-x-和-n-求"><a href="#给定-x-和-n-求" class="headerlink" title="给定$x$和$n$求"></a>给定$x$和$n$求</h5><script type="math/tex; mode=display">
+\prod_{i = 1}^nf(x,i)</script><h5 id="将条件带入"><a href="#将条件带入" class="headerlink" title="将条件带入"></a>将条件带入</h5><script type="math/tex; mode=display">
+\begin{equation}
+    \begin{split}
+        \label{equation:empirical}
+        \prod_{i=1}^nf(x, i) &= \prod_{i=1}^n\prod_{j\in prime(x)}g(i,j)\\
+        &=\prod_{j\in prime(x)}\prod_{i=1}^ng(i, j)\\
+    \end{split}
+\end{equation}</script><h5 id="显然前一个连乘可以通过对x预处理质因数这-log-的时间内解决，最后的答案显然是j-1-k-1-j-2-k-2-j-3-k-3-cdots-j-num-k-num-假设x存在num个质因数-，只需要对于每个质因数求出相对应的k即可，具体做法可以对于每个质因数p，在-1，-2，-3，4，…-，n-中比较p和n，2p和n，3p和n的大小并用除法快速统计，总共累加起来即可得到k"><a href="#显然前一个连乘可以通过对x预处理质因数这-log-的时间内解决，最后的答案显然是j-1-k-1-j-2-k-2-j-3-k-3-cdots-j-num-k-num-假设x存在num个质因数-，只需要对于每个质因数求出相对应的k即可，具体做法可以对于每个质因数p，在-1，-2，-3，4，…-，n-中比较p和n，2p和n，3p和n的大小并用除法快速统计，总共累加起来即可得到k" class="headerlink" title="显然前一个连乘可以通过对x预处理质因数这$log$的时间内解决，最后的答案显然是j_{1}^{k_{1}} * j_{2}^{k_{2}} * j_{3}^{k_{3}} * \cdots * j_{num} ^ {k_{num}}(假设x存在num个质因数)，只需要对于每个质因数求出相对应的k即可，具体做法可以对于每个质因数p，在{1， 2， 3，4，….，n}中比较p和n，2p和n，3p和n的大小并用除法快速统计，总共累加起来即可得到k"></a>显然前一个连乘可以通过对x预处理质因数这$log$的时间内解决，最后的答案显然是<script type="math/tex">j_{1}^{k_{1}} * j_{2}^{k_{2}} * j_{3}^{k_{3}} * \cdots * j_{num} ^ {k_{num}}</script>(假设x存在num个质因数)，只需要对于每个质因数求出相对应的k即可，具体做法可以对于每个质因数p，在{1， 2， 3，4，….，n}中比较p和n，2<em>p和n，3</em>p和n的大小并用除法快速统计，总共累加起来即可得到k</h5><h5 id="可能会爆long-long-写的时候注意一下即可"><a href="#可能会爆long-long-写的时候注意一下即可" class="headerlink" title="可能会爆long long 写的时候注意一下即可"></a>可能会爆long long 写的时候注意一下即可</h5><h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mp make_pair</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">4e5</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MOD = <span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod(x) x % MOD</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">is_prime</span><span class="params">(ll x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x == <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(x == <span class="number">2</span> || x == <span class="number">3</span> || x == <span class="number">5</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span>(ll i = <span class="number">2</span>;i * i &lt;= x;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(x % i == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">vector</span>&lt;ll&gt; prime;</span><br><span class="line"><span class="function">ll <span class="title">qpow</span><span class="params">(ll a,ll b)</span></span>&#123;</span><br><span class="line">    ll res = <span class="number">1</span>;</span><br><span class="line">    a = mod(a);</span><br><span class="line">    <span class="keyword">while</span>(b)&#123;</span><br><span class="line">        <span class="keyword">if</span>(b &amp; <span class="number">1</span>) res = mod(res * a);</span><br><span class="line">        a = mod(a * a);</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ll x, n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld %lld"</span>, &amp;x, &amp;n);</span><br><span class="line">    <span class="keyword">if</span>(is_prime(x)) prime.push_back(x);</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        ll t = x;</span><br><span class="line">        <span class="keyword">for</span>(ll i = <span class="number">2</span>;i &lt;= x;i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(x % i == <span class="number">0</span>) &#123;</span><br><span class="line">                prime.push_back(i);</span><br><span class="line">                <span class="keyword">while</span>(x % i == <span class="number">0</span>) x /= i;</span><br><span class="line">                <span class="keyword">if</span>(is_prime(x)) &#123;</span><br><span class="line">                    prime.push_back(x);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> len = prime.size();</span><br><span class="line">    ll ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len;i++) &#123;</span><br><span class="line">        ll cnt = <span class="number">0</span>;</span><br><span class="line">        ll tmp = prime[i];</span><br><span class="line">        <span class="keyword">while</span>(tmp &lt;= n / prime[i] &amp;&amp; tmp * prime[i] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            cnt += n / tmp;</span><br><span class="line">            tmp = tmp * prime[i];</span><br><span class="line">        &#125;</span><br><span class="line">        ll num = n / tmp;</span><br><span class="line">        cnt += num;</span><br><span class="line">        ans *= qpow(prime[i], cnt);</span><br><span class="line">        ans = mod(ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, mod(ans));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://ellery.com/2019/10/02/cf-589DIV2/" data-id="ck194ntbp000kd4r5og417s65" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Ellery"
+        },
+        "headline": "CF #589DIV2",
+        "image": "http://ellery.com/thumbnail/CF2.png",
+        "keywords": "solution codeforces",
+        "genre": "solution codeforces",
+        "datePublished": "2019-10-02",
+        "dateCreated": "2019-10-02",
+        "dateModified": "2019-10-02",
+        "url": "http://ellery.com/2019/10/02/cf-589DIV2/",
+        "description": "CodeForces #589DIV2题解
+
+C Primes and Multiplication定义
+prime(x) = \{p|p \in prime \wedge p|x\}即x的所有质因子定义  $g(x, p)$，$f(x, y)$：
+g(x,p) = p^k (k尽可能大且p^k\mid x) \qquad   f(x, y) = \prod_{i\in prime(x)}g(y,",
+        "wordCount": 889
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google-plus" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-google-plus"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/ppoffice/hexo-theme-hueman" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/07/26/Geometry/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">Geometry</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/10/02/cf-589DIV2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnail/CF2.png)" alt="CF #589DIV2" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/solution/">solution</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/solution/codeforces/">codeforces</a></p>
+                            <p class="item-title"><a href="/2019/10/02/cf-589DIV2/" class="title">CF #589DIV2</a></p>
+                            <p class="item-date"><time datetime="2019-10-02T07:36:30.000Z" itemprop="datePublished">2019-10-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/07/26/Geometry/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/07/26/Geometry/" class="title">Geometry</a></p>
+                            <p class="item-date"><time datetime="2019-07-26T02:44:08.000Z" itemprop="datePublished">2019-07-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/07/16/MillerRabbin/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/07/16/MillerRabbin/" class="title">MillerRabbin</a></p>
+                            <p class="item-date"><time datetime="2019-07-16T12:46:14.000Z" itemprop="datePublished">2019-07-16</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/06/02/ACAM/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/06/02/ACAM/" class="title">ACAM</a></p>
+                            <p class="item-date"><time datetime="2019-06-02T11:01:15.000Z" itemprop="datePublished">2019-06-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/04/15/tarjan/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/04/15/tarjan/" class="title">tarjan</a></p>
+                            <p class="item-date"><time datetime="2019-04-15T12:39:31.000Z" itemprop="datePublished">2019-04-15</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/solution/">solution</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/solution/codeforces/">codeforces</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">4</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DP/">DP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ds/">Ds</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Geometry/">Geometry</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/">Graph</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/">Math</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/">Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">codeforces</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/solution/">solution</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Ds/" style="font-size: 15px;">Ds</a> <a href="/tags/Geometry/" style="font-size: 10px;">Geometry</a> <a href="/tags/Graph/" style="font-size: 20px;">Graph</a> <a href="/tags/Math/" style="font-size: 20px;">Math</a> <a href="/tags/String/" style="font-size: 10px;">String</a> <a href="/tags/Tree/" style="font-size: 10px;">Tree</a> <a href="/tags/codeforces/" style="font-size: 10px;">codeforces</a> <a href="/tags/solution/" style="font-size: 10px;">solution</a> <a href="/tags/tips/" style="font-size: 15px;">tips</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2019 Ellery</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://ellery.com/2019/10/02/cf-589DIV2/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
